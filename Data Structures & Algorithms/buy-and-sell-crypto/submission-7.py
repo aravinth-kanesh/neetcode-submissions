@@ -13,3 +13,5 @@ class Solution:
         # this way, we do not need to sort
         # time is O(n), space is O(1)
         return max_profit
+
+        # time is O(n) and space is O(1)
