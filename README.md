@@ -1,4 +1,4 @@
-# NeetCode Solutions — @aravinth-kanesh
+# NeetCode Solutions - @aravinth-kanesh
 
 > Synced automatically from [NeetCode.io](https://neetcode.io)
 
