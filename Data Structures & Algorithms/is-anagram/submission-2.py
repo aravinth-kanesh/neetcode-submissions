@@ -1,0 +1,21 @@
+class Solution:
+    def isAnagram(self, s: str, t: str) -> bool:
+        if not s or not t:
+            return False
+
+        if len(s) != len(t):
+            return False
+
+        letters = []
+        for letter in s:
+            letters.append(letter)
+
+        for letter in t:
+            if letter not in letters:
+                return False
+            else:
+                letters.remove(letter)
+
+        return True
+
+        
