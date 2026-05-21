@@ -7,13 +7,22 @@
 
 class Solution:
     def isValidBST(self, root: Optional[TreeNode]) -> bool:
-        def dfs(node, low, high):
+        # recursion problem - can use dfs
+        def dfs(node, min_val, max_val):
+            # stop infinite recursion
             if not node:
                 return True
 
-            if not (low < node.val < high):
+            # must be within the valid range
+            if not (min_val < node.val < max_val):
                 return False
 
-            return dfs(node.left, low, node.val) and dfs(node.right, node.val, high)
+            # recurse for subtrees
+            # for left subtree, max_val is now node.val
+            # for right subtee, min_val is now node.val
+            return dfs(node.left, min_val, node.val) and dfs(node.right, node.val, max_val)
 
-        return dfs(root, float("-inf"), float("inf"))
+        # start recursion at the root
+        return dfs(root, float('-inf'), float('inf'))
+
+            
