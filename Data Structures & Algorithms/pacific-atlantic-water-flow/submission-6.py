@@ -1,0 +1,45 @@
+class Solution:
+    def pacificAtlantic(self, heights: List[List[int]]) -> List[List[int]]:
+        # instead of iterating through every square and seeing if water can
+        # flow from it to both oceans, simulate water flow from both oceans
+        # and find the intersection of both sets 
+        rows, columns = len(heights), len(heights[0])
+        directions = [(1, 0), (-1, 0), (0, 1), (0, -1)]
+        pacific, atlantic = set(), set()
+
+        queue = deque()
+
+        def bfs(visited):
+            while queue:
+                row, col = queue.popleft()
+
+                for dr, dc in directions:
+                    nr, nc = row + dr, col + dc
+
+                    if 0 <= nr < rows and 0 <= nc < columns and heights[nr][nc] >= heights[row][col] and (nr, nc) not in visited:
+                        visited.add((nr, nc))
+                        queue.append((nr, nc))
+
+        # main loop
+
+        # pacific
+        for c in range(columns):
+            queue.append((0, c))
+            pacific.add((0, c))
+        for r in range(1, rows):
+            queue.append((r, 0))
+            pacific.add((r, 0))
+        bfs(pacific)
+
+        # atlantic
+        for c in range(columns):
+            queue.append((rows - 1, c))
+            atlantic.add((rows - 1, c))
+        for r in range(rows - 1):
+            queue.append((r, columns - 1))
+            atlantic.add((r, columns - 1))
+        bfs(atlantic)
+
+        # find intersection of sets
+        return list(pacific & atlantic)
+
